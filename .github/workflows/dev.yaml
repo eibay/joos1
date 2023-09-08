@@ -39,5 +39,5 @@ jobs:
     - name: Push Docker image
       run: docker push eibayan/joos:latest
 
-    - name: Deploy to Production
+    # - name: Deploy to Production
       # Add your deployment steps here
