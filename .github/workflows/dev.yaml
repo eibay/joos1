@@ -29,10 +29,11 @@ jobs:
     #     push: true
     #     tags: eibayan/joos:latest
     - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:          
-          tags: eibayan/joos:latest
+      id: meta
+      uses: docker/metadata-action@v4
+      with:          
+        tags: eibayan/joos:latest
+        
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     
