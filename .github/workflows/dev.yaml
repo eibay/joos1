@@ -16,7 +16,7 @@ jobs:
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.x  # Replace with your desired .NET version
+        dotnet-version: 6.x  # Replace with your desired .NET version
 
     - name: Build .NET application
       run: dotnet build --configuration Release
