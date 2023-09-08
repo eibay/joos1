@@ -1,23 +1,27 @@
-# Use the official .NET Core SDK as a parent image
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+# Use the official .NET 6 SDK image as a build stage
+FROM mcr.microsoft.com/dotnet/sdk:6.0-preview AS build
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy the .csproj and restore any dependencies (if using .csproj)
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy the remaining source code
 COPY . .
 
-# Build the application and publish it
+# Build the application in Release mode
 RUN dotnet publish -c Release -o out
 
-# Use a smaller runtime image as a parent image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+# Use the official .NET 6 runtime image as the final stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-preview
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the published app from the build environment
-COPY --from=build-env /app/out .
+# Copy the published application from the build stage to the final stage
+COPY --from=build /app/out .
 
 # Specify the entry point for your application
 ENTRYPOINT ["dotnet", "Joos.dll"]
