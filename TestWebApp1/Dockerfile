@@ -1,6 +1,6 @@
 # Use the official .NET 6 SDK image as a build stage
-FROM mcr.microsoft.com/dotnet/sdk:6.0-preview AS build
-
+# FROM mcr.microsoft.com/dotnet/core/sdk:6.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 # Set the working directory to /app
 WORKDIR /app
 
@@ -15,7 +15,7 @@ COPY . .
 RUN dotnet publish -c Release -o out
 
 # Use the official .NET 6 runtime image as the final stage
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-preview
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 
 # Set the working directory to /app
 WORKDIR /app
@@ -24,4 +24,4 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Specify the entry point for your application
-ENTRYPOINT ["dotnet", "Joos.dll"]
+ENTRYPOINT ["dotnet", "TestWebApp1.dll"]
