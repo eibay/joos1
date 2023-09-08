@@ -28,10 +28,10 @@ jobs:
     #     platforms: linux/arm64
     #     push: true
     #     tags: eibayan/joos:latest
-    name: Set up QEMU
+    - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
-    -
-      name: Set up Docker Buildx
+    
+    - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
         
     - name: Login to Docker Hub
